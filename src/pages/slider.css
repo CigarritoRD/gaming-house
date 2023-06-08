@@ -1,0 +1,14 @@
+.slider {
+  display: flex;
+  max-width: 800px;
+  aspect-ratio: 16/9;
+  overflow-x: scroll;
+  overflow-y:hidden;
+  scroll-snap-type: x mandatory;
+  position: relative;
+}
+.sliderItem {
+  scroll-snap-align: center;
+  position: sticky;
+  left: 0;
+}
