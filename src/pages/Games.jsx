@@ -8,7 +8,6 @@ const Games = () => {
   const { genre } = useParams()
 
   const { games, error } = useGames({ query: genre, type: 'genres' })
-  console.log(games.length)
   const isLoading = !!(games.length === 0 && !error)
   return (
 
