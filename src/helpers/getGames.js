@@ -2,7 +2,7 @@ import { API } from '../constants/url'
 
 export async function getGames ({ query = '', type = '' }) {
   try {
-    const url = type
+    const url = type && query
       ? `${API.SECTION.GAMES}?${API.API_KEY}&${type}=${query.toLowerCase()}`
       : `${API.SECTION.GAMES}?${API.API_KEY}`
     const res = await fetch(url)

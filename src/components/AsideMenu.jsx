@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react'
 import './scrollbarcss.css'
 import { Link } from 'react-router-dom'
+import { API, API_URL } from '../constants/url'
 const AsideMenu = () => {
   const [genres, setGenres] = useState([])
   const [platforms, setPlatforms] = useState([])
   const [limit, setLimit] = useState({ platform: 5, genres: 5 })
+
   const getGenres = async () => {
-    const url = 'https://api.rawg.io/api/genres?key=0beea51f3404489e88ca4d53a1483c54'
+    const url = `${API_URL}genres?${API.API_KEY}`
     try {
       const res = await fetch(url)
       if (!res.ok) throw new Error('error al encontrar los generos')
@@ -18,7 +20,7 @@ const AsideMenu = () => {
   }
 
   const getPlatforms = async () => {
-    const url = 'https://api.rawg.io/api/platforms?key=0beea51f3404489e88ca4d53a1483c54'
+    const url = `${API_URL}platforms?${API.API_KEY}`
     try {
       const res = await fetch(url)
       if (!res.ok) throw new Error('error al encontrar los generos')
