@@ -4,6 +4,7 @@ export const API = {
   API_KEY,
   SECTION: {
     GAMES: `${API_URL}games`,
-    PLATFORMS: `${API_URL}platforms`
+    PLATFORMS: `${API_URL}platforms`,
+    GENRES: `${API_URL}genres`
   }
 }
