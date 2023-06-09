@@ -1,37 +1,24 @@
 import { useEffect, useState } from 'react'
 import './scrollbarcss.css'
 import { Link } from 'react-router-dom'
-import { API, API_URL } from '../constants/url'
+import { getPlatforms } from '../helpers/getPlatforms'
+import { getGenres } from '../helpers/getGenres'
+
 const AsideMenu = () => {
   const [genres, setGenres] = useState([])
   const [platforms, setPlatforms] = useState([])
   const [limit, setLimit] = useState({ platform: 5, genres: 5 })
 
-  const getGenres = async () => {
-    const url = `${API_URL}genres?${API.API_KEY}`
-    try {
-      const res = await fetch(url)
-      if (!res.ok) throw new Error('error al encontrar los generos')
-      const { results } = await res.json()
-      setGenres(results)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const getPlatforms = async () => {
-    const url = `${API_URL}platforms?${API.API_KEY}`
-    try {
-      const res = await fetch(url)
-      if (!res.ok) throw new Error('error al encontrar los generos')
-      const { results } = await res.json()
-      setPlatforms(results)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-  useEffect(() => getPlatforms, [])
-  useEffect(() => getGenres, [])
+  useEffect(() => {
+    getPlatforms()
+      .then(data => { setPlatforms(data) })
+      .catch(err => console.log(err))
+  }, [])
+  useEffect(() => {
+    getGenres()
+      .then(data => { setGenres(data) })
+      .catch(err => console.log(err))
+  }, [])
 
   const OnChangeLimits = (e) => {
     const name = e.target.name
