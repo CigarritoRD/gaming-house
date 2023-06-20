@@ -1,7 +1,7 @@
 
 import { lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
-
+const DiscoverType = lazy(() => import('../pages/DiscoverType'))
 const Games = lazy(() => import('../pages/Games'))
 const Home = lazy(() => import('../pages/Home'))
 const GameDetail = lazy(() => import('../pages/GameDetail'))
@@ -12,6 +12,7 @@ const Routers = () => {
     <Suspense fallback={<h1>Cargando...</h1>}>
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/:type' element={<DiscoverType />} />
         < Route path='/search/' element={< Search />} />
         < Route path='/search/:query' element={< Search />} />
         < Route path='/games' element={< Games />} />

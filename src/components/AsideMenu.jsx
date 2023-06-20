@@ -11,7 +11,10 @@ const AsideMenu = () => {
 
   useEffect(() => {
     getPlatforms()
-      .then(data => { setPlatforms(data) })
+      .then(data => {
+        setPlatforms(data)
+        console.log(data)
+      })
       .catch(err => console.log(err))
   }, [])
   useEffect(() => {
@@ -35,8 +38,8 @@ const AsideMenu = () => {
         <ul className="p-4 flex flex-col gap-3">
           {genres?.slice(0, limit.genres).map(genre => (
             <li key={genre.name} className="text-xl text-slate-300 hover:text-yellow-400 capitalize cursor-pointer duration-200">
-              <Link to={`games/${genre.name}`}>
-                {genre.name}
+              <Link className='flex items-center gap-2' to={`games/${genre.name}`}>
+                <img className='h-10 w-10 object-cover rounded-xl' src={genre.image_background} alt="" /><p>{genre.name}</p>
               </Link>
             </li>
           ))}
@@ -52,9 +55,12 @@ const AsideMenu = () => {
         <h4 className="text-2xl text-slate-100">Plataformas</h4>
         <ul className="p-4 flex flex-col gap-3">
           {platforms?.slice(0, limit.platform).map(platform => (
-            <Link key={platform.id} to={`games/${platform.slug}`}>
-              <li className="text-xl text-slate-300 hover:text-yellow-400 capitalize cursor-pointer duration-200">{platform.name}</li>
-            </Link>
+
+            <li key={platform.id} className="text-xl text-slate-300 hover:text-yellow-400 capitalize cursor-pointer duration-200">
+              <Link className='flex items-center gap-2' to={`games/${platform.slug}`}>
+                <img className='h-10 w-10 object-cover rounded-xl' src={platform.image_background} alt="" />  <p>{platform.name}</p>
+              </Link>
+            </li>
           ))}
 
         </ul>

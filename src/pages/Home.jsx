@@ -3,7 +3,7 @@ import useGames from '../hooks/useGames'
 import { GameList } from '../components/GamesList'
 
 const Home = () => {
-  const { games } = useGames({})
+  const { games, getMoreGames, page } = useGames({})
   const [portada, setPortada] = useState({})
   const portadaInicial = useRef({ name: '', imagen: '' })
 
@@ -22,6 +22,10 @@ const Home = () => {
     return () => clearTimeout(portadaChanger)
   }, [games, portada])
 
+  const handleclick = () => {
+    getMoreGames({ url: page })
+  }
+
   return (
     <div className='h-full rounded-3xl w-full overflow-y-scroll flex flex-col gap-4 p-4 scrollbar'>
       <div className='rounded-3xl bg-slate-950 min-h-[400px] xl:min-h-[400px] overflow-hidden relative '>
@@ -32,7 +36,7 @@ const Home = () => {
         </div>
         <img className='w-full rounded-3xl h-full object-cover object-top' src={portada?.imagen} alt="" loading='lazy' />
       </div>
-      <GameList games={games} />
+      <GameList games={games} getMoreGames={handleclick} />
 
     </div >
   )

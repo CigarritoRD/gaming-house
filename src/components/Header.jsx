@@ -37,12 +37,22 @@ const Header = () => {
               <SearchOutlinedIcon className='absolute top-3 right-2' fontSize='medium' />
             </form>
           </div>
+
           <ul className='items-center hidden md:flex'>
-            <li className='text-sm lg:text-lg px-2 py-1 rounded-xl hover:bg-slate-200/20 duration-150 cursor-pointer'>Mejores</li>
-            <li className='text-sm lg:text-lg px-2 py-1 rounded-xl hover:bg-slate-200/20 duration-150 cursor-pointer'>Nuevos</li>
-            <li className='text-sm lg:text-lg px-2 py-1 rounded-xl hover:bg-slate-200/20 duration-150 cursor-pointer'>Proximos estrenos </li>
-            <li className='text-sm lg:text-lg px-2 py-1 rounded-xl hover:bg-slate-200/20 duration-150 cursor-pointer'>Plataformas </li>
+            <NavLink to={'mejores'}>
+              <li className='text-sm lg:text-lg px-2 py-1 rounded-xl hover:bg-slate-200/20 duration-150 cursor-pointer'>Mejores</li>
+            </NavLink>
+            <NavLink to={'nuevos'}>
+              <li className='text-sm lg:text-lg px-2 py-1 rounded-xl hover:bg-slate-200/20 duration-150 cursor-pointer'>Nuevos</li>
+            </NavLink>
+            <NavLink to={'proximos-estrenos'}>
+              <li className='text-sm lg:text-lg px-2 py-1 rounded-xl hover:bg-slate-200/20 duration-150 cursor-pointer'>Proximos estrenos </li>
+            </NavLink >
+            <NavLink to={'plataformas'}>
+              <li className='text-sm lg:text-lg px-2 py-1 rounded-xl hover:bg-slate-200/20 duration-150 cursor-pointer'>Plataformas </li>
+            </NavLink>
           </ul>
+
         </div>
         <div>
           <ul className='hidden md:flex text-xl gap-4'>

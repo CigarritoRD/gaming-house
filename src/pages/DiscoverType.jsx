@@ -1,17 +1,15 @@
 
-import { useParams } from 'react-router-dom'
-import { GameList } from '../components/GamesList'
-import useGames from '../hooks/useGames'
 import { Bars } from 'react-loader-spinner'
+import { useParams } from 'react-router-dom'
 
-const Games = () => {
-  const params = useParams()
+import { GameList } from '../components/GamesList'
+import { useDiscoverGames } from '../hooks/useDiscoverGames'
 
-  const { games, error, getMoreGames, page } = useGames(params)
-  const isLoading = !!(games.length === 0 && !error)
-
-  const handleclick = () => {
-    getMoreGames({ url: page })
+const DiscoverType = () => {
+  const { type } = useParams()
+  const { games, isLoading, getType, next } = useDiscoverGames({ type })
+  const handleClick = () => {
+    getType(next)
   }
   return (
 
@@ -28,11 +26,10 @@ const Games = () => {
             visible={true}
           />
         </div>}
-      {games.length > 0 && <GameList games={games} getMoreGames={handleclick} />}
+      {!isLoading && games.length > 0 && <GameList games={games} getMoreGames={handleClick} />}
 
     </div >
-
   )
 }
 
-export default Games
+export default DiscoverType

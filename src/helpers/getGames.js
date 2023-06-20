@@ -1,14 +1,11 @@
-import { API } from '../constants/url'
 
-export async function getGames (id) {
+export async function getGames ({ url }) {
   try {
-    const url = id
-      ? `${API.SECTION.GAMES}?${API.API_KEY}${typeof id === 'number' ? `&platforms=${id}` : `&genres=${id}`.toLowerCase()}`
-      : `${API.SECTION.GAMES}?${API.API_KEY}`
+    console.log(url)
     const res = await fetch(url)
     if (!res.ok) throw new Error('error del servidor')
     const data = await res.json()
-    return data.results
+    return data
   } catch (error) {
     console.log(error)
   }
