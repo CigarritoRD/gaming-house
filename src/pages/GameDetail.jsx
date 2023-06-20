@@ -75,8 +75,8 @@ const GameDetail = () => {
             </div>
           </div>
         </div>
-      </div >
-    </div >
+      </div>
+    </div>
   )
 }
 

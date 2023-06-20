@@ -5,7 +5,7 @@ const GameListItem = ({ game }) => {
   return (
     <li key={game?.id} className='hover:scale-[103%] duration-200 bg-slate-800 cursor-pointer h-fit w-full min-w-[250px] overflow-hidden rounded-3xl flex flex-col justify-between shadow-md'>
       <Link to={`/games/detail/${game?.slug}`} ><div className='overflow-hidden '>
-        <img className='w-full min-h-[200px] h-[200px] object-cover' src={game?.background_image} alt="" />
+        <img className='w-full min-h-[200px] h-[200px] object-cover' src={game?.background_image} alt="" loading='lazy' />
       </div>
         <div className='p-4 flex flex-col gap-2 justify-between '>
           <h3 className='text-2xl font-bold text-slate-200'>{game?.name}</h3>

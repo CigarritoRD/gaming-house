@@ -30,7 +30,7 @@ const Home = () => {
 
           <h2 className=' bg-black/60 text-4xl py-1 px-6 text-slate-200 font-bold'>{portada?.titulo}</h2>
         </div>
-        <img className='w-full rounded-3xl h-full object-cover object-top' src={portada?.imagen} alt="" />
+        <img className='w-full rounded-3xl h-full object-cover object-top' src={portada?.imagen} alt="" loading='lazy' />
       </div>
       <GameList games={games} />
 

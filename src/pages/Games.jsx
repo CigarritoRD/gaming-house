@@ -5,9 +5,9 @@ import useGames from '../hooks/useGames'
 import { Bars } from 'react-loader-spinner'
 
 const Games = () => {
-  const { genre } = useParams()
+  const params = useParams()
 
-  const { games, error } = useGames({ query: genre, type: 'genres' })
+  const { games, error } = useGames(params)
   const isLoading = !!(games.length === 0 && !error)
   return (
 

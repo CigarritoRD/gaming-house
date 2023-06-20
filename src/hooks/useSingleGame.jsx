@@ -7,7 +7,7 @@ const useSingleGame = ({ slug }) => {
   const [screenShots, setScreenShots] = useState([])
 
   useEffect(() => {
-    if (slug === '') return console.log('esta vacio')
+    if (slug === '') return
     const getSingleGame = async ({ slug }) => {
       const res = await fetch(`${API.SECTION.GAMES}/${slug}?${API.API_KEY}`)
       const data = await res.json()

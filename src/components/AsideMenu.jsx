@@ -52,7 +52,9 @@ const AsideMenu = () => {
         <h4 className="text-2xl text-slate-100">Plataformas</h4>
         <ul className="p-4 flex flex-col gap-3">
           {platforms?.slice(0, limit.platform).map(platform => (
-            <li key={platform.name} className="text-xl text-slate-300 hover:text-yellow-400 capitalize cursor-pointer duration-200">{platform.name}</li>
+            <Link key={platform.id} to={`games/${platform.slug}`}>
+              <li className="text-xl text-slate-300 hover:text-yellow-400 capitalize cursor-pointer duration-200">{platform.name}</li>
+            </Link>
           ))}
 
         </ul>

@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 
 import { getGames } from '../helpers/getGames'
+import { getPlatforms } from '../helpers/getPlatforms'
 
-const useGames = ({ query, type }) => {
+const useGames = ({ name }) => {
   const [games, setGames] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -11,14 +12,21 @@ const useGames = ({ query, type }) => {
     setLoading(true)
     setError('')
     setGames([])
-    getGames({ query, type })
+    getPlatforms()
       .then(data => {
-        setGames(data)
-        console.log(data)
-      }).catch(err =>
-        setError(err.message))
-      .finally(setLoading(false))
-  }, [query, type])
+        const results = data.filter(data => data.slug === name)
+        const platform = results[0]?.id
+
+        getGames(platform ?? name)
+          .then(data => {
+            setGames(data)
+          }).catch(err =>
+            setError(err.message))
+          .finally(setLoading(false))
+      })
+      .catch(err => console.log(err))
+  }, [name])
+
   return { games, getGames, loading, error }
 }
 
