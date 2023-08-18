@@ -1,33 +1,30 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { API_KEY, API_URL } from '../constants/url'
+import { getGames } from '../helpers/getGames'
 
 const typesOfUrls = {
-  mejores: `${API_URL}games?${API_KEY}&metacritic=75,100&ordering=-metacritic`,
-  nuevos: `${API_URL}games?${API_KEY}&dates=2022-09-01,2023-09-01&ordering=-released`,
+  mejores: `${API_URL}games?${API_KEY}&metacritic=75,100&ordering=-metacritic&page=1`,
+  nuevos: `${API_URL}games?${API_KEY}&dates=2022-09-01,2023-09-01&ordering=-released&page=1`,
   'proximos-estrenos': '',
   plataformas: ''
 }
 export function useDiscoverGames ({ type }) {
   const [games, setGamesBy] = useState([])
   const [isLoading, setIsloading] = useState(false)
-  const [next, setNext] = useState(1)
+  const NextPage = useRef('')
 
-  const getType = async (page) => {
+  const getType = async () => {
+    setIsloading(true)
     try {
-      const response = await fetch(`${typesOfUrls[type]}&page=${page}`)
-
-      if (!response.ok) return new Error('hubo un problema con el servidor')
-      const url = response.url.split('=')
-      const nextPage = Number(url[url.length - 1])
-      setNext(nextPage + 1)
-      const { results } = await response.json()
-      const data = results.map(item => {
+      const url = NextPage.current !== '' ? NextPage.current : `${typesOfUrls[type]}`
+      const { next, results } = await getGames({ url })
+      NextPage.current = next
+      const mapedGames = results.map(item => {
         return { ...item }
       })
       setGamesBy(prevGames => {
         const games = structuredClone(prevGames)
-        const newgames = games.concat(data)
-
+        const newgames = games.concat(mapedGames)
         return newgames
       })
     } catch (error) {
@@ -35,10 +32,10 @@ export function useDiscoverGames ({ type }) {
     } finally { setIsloading(false) }
   }
   useEffect(() => {
+    NextPage.current = ''
     setGamesBy([])
-    setIsloading(true)
-    getType(next)
+    getType()
   }, [type])
 
-  return { games, isLoading, getType, next }
+  return { games, isLoading, getType }
 }

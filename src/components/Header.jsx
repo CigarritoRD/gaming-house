@@ -6,19 +6,38 @@ import CloseIcon from '@mui/icons-material/Close'
 import MenuIcon from '@mui/icons-material/Menu'
 import { NavLink, useNavigate } from 'react-router-dom'
 import ggIcon from '../assets/icon-gg.svg'
+import MenuItems from './menu-items'
 
 const Header = () => {
   const [menu, setMenu] = useState(false)
   const navigate = useNavigate()
   const queryRef = useRef('')
+
   const submitHandler = (event) => {
     event.preventDefault()
     navigate(`/search/${queryRef.current.value}`)
-
-    console.log('searching...')
   }
   const handleMenu = () => {
     setMenu(!menu)
+  }
+  const NAVLINK = {
+    MEJORES: {
+      HREF: 'mejores',
+      TEXT: 'Mejores'
+    },
+    NUEVOS: {
+      HREF: 'nuevos',
+      TEXT: 'Nuevos'
+    },
+    PROXIMOS: {
+      HREF: 'proximos-estrenos',
+      TEXT: 'Proximos estrenos'
+    },
+    PLATAFORMAS: {
+      HREF: 'plataformas',
+      TEXT: 'Plataformas'
+    }
+
   }
   return (
     <header className='h-22 px-2 text-slate-200 pb-2'>
@@ -33,25 +52,15 @@ const Header = () => {
         <div className='flex gap-8'>
           <div className='flex-1 relative'>
             <form onSubmit={submitHandler} action="">
-              <input ref={queryRef} className=' min-w-[180px] md:min-w-[200px] lg:min-w-[300px] placeholder:text-slate-600 text-slate-300 w-full p-3 rounded-2xl bg-slate-800/90 outline-none' type="text" placeholder='Encuentra cientos de miles de juegos...' />
-              <SearchOutlinedIcon className='absolute top-3 right-2' fontSize='medium' />
+              <input ref={queryRef} className=' min-w-[180px] md:min-w-[200px] lg:min-w-[300px] placeholder:text-slate-400 text-slate-300 w-full px-4 py-2 rounded-2xl bg-slate-900 border border-slate-400 outline-none' type="text" placeholder='Buscar juegos...' />
+              <SearchOutlinedIcon className='absolute top-2 right-2' fontSize='medium' />
             </form>
           </div>
 
-          <ul className='items-center hidden md:flex'>
-            <NavLink to={'mejores'}>
-              <li className='text-sm lg:text-lg px-2 py-1 rounded-xl hover:bg-slate-200/20 duration-150 cursor-pointer'>Mejores</li>
-            </NavLink>
-            <NavLink to={'nuevos'}>
-              <li className='text-sm lg:text-lg px-2 py-1 rounded-xl hover:bg-slate-200/20 duration-150 cursor-pointer'>Nuevos</li>
-            </NavLink>
-            <NavLink to={'proximos-estrenos'}>
-              <li className='text-sm lg:text-lg px-2 py-1 rounded-xl hover:bg-slate-200/20 duration-150 cursor-pointer'>Proximos estrenos </li>
-            </NavLink >
-            <NavLink to={'plataformas'}>
-              <li className='text-sm lg:text-lg px-2 py-1 rounded-xl hover:bg-slate-200/20 duration-150 cursor-pointer'>Plataformas </li>
-            </NavLink>
-          </ul>
+          <MenuItems
+            className={'items-center hidden md:flex'}
+            items={NAVLINK}
+          />
 
         </div>
         <div>
@@ -73,28 +82,28 @@ const Header = () => {
           {menu && <div className='absolute inset-0 backdrop-blur-[2px] z-30 bg-black/60'></div>}
           <div className={`md:hidden absolute w-[60%] h-full z-40 p-4 text-lg bg-slate-600 top-0 right-0 shadow-lg duration-200 ${menu ? 'translate-x-[0%]' : 'translate-x-[100%]'}`}>
 
-            <ul className='relative'>
+            <div className='relative'>
               {menu && <CloseIcon onClick={handleMenu} className='absolute cursor-pointer -left-40 rounded-full' />}
-              <div className='flex justify-between border-b pb-2 border-slate-500'>
+              <ul className='flex justify-between border-b pb-2 border-slate-500'>
                 <li>
                   <FavoriteOutlinedIcon fontSize='medium' />
                 </li>
                 <li>
                   <PersonOutlinedIcon fontSize='medium' />
                 </li>
-              </div>
+              </ul>
 
-              <li className='lg:text-lg px-2 py-1 rounded-xl hover:bg-slate-200/20 duration-150 cursor-pointer'>Mejores</li>
-              <li className='lg:text-lg px-2 py-1 rounded-xl hover:bg-slate-200/20 duration-150 cursor-pointer'>Nuevos</li>
-              <li className='lg:text-lg px-2 py-1 rounded-xl hover:bg-slate-200/20 duration-150 cursor-pointer'>Proximos estrenos </li>
-              <li className='lg:text-lg px-2 py-1 rounded-xl hover:bg-slate-200/20 duration-150 cursor-pointer'>Plataformas </li>
+              <MenuItems
+                className={'items-center hidden md:flex'}
+                items={NAVLINK}
+              />
 
-            </ul>
+            </div>
           </div>
         </div>
 
       </nav>
-    </header>
+    </header >
   )
 }
 

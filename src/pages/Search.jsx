@@ -6,7 +6,7 @@ import { GameList } from '../components/GamesList'
 
 const Search = () => {
   const { query } = useParams()
-  const { games, loading } = useGames({ query, type: 'search' })
+  const { games, loading } = useGames({ search: query })
 
   return (
 
