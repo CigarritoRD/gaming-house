@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import { getGames } from '../services/getGames'
 import { getPlatforms } from '../services/getPlatforms'
@@ -9,12 +9,13 @@ const useGames = ({ search = '', platformOrGenres = '' }) => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [page, setPage] = useState('')
-  const [portada, setPortada] = useState({})
+  const [portada, setPortada] = useState({ titulo: '', imagen: '' })
 
   const getMoreGames = ({ url }) => {
     getGames({ url })
       .then(data => {
         setPage(data.next)
+        if (!portada.titulo) { setPortada({ titulo: data.results[0]?.name, imagen: data.results[0]?.background_image }) }
         setGames(prev => {
           const prevGames = structuredClone(prev)
           const newGames = prevGames.concat(data.results)
@@ -60,25 +61,22 @@ const useGames = ({ search = '', platformOrGenres = '' }) => {
     getMoreGames({ url })
   }, [search, platformOrGenres])
 
-  const portadaInicial = useRef({ name: '', imagen: '' })
-
   const portadas = useMemo(() => games.map(game => {
-    return { imagen: game.background_image, titulo: game.name }
+    return {
+      imagen: game.background_image,
+      titulo: game.name
+    }
   }), [games])
 
-  useMemo(() => {
-    // crea una portada incial
-    if (!portadaInicial.current.name && games.length > 0) {
-      portadaInicial.current = { name: games[0].name, imagen: games[0]?.background_image }
-      setPortada(portadaInicial.current)
-    }
+  useEffect(() => {
     // cambia las portadas de manera aleatoria
     const portadaChanger = setTimeout(() => {
+      console.log('refresh')
       const portadaAleatoria = Math.floor(Math.random() * games.length)
       setPortada(portadas[portadaAleatoria])
     }, 5000)
     return () => clearTimeout(portadaChanger)
-  }, [games, portada])
+  }, [portada])
 
   return { games, getMoreGames, loading, error, page, portada }
 }

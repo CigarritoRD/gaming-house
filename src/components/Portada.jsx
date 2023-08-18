@@ -1,4 +1,5 @@
 export default function Portada ({ portada }) {
+  console.log('refresh portada')
   return (
     <div className='rounded-3xl bg-slate-950 min-h-[300px] xl:min-h-[400px] overflow-hidden relative '>
 
