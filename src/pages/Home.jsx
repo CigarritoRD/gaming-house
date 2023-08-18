@@ -1,7 +1,7 @@
 
-import useGames from '../hooks/useGames'
-import { GameList } from '../components/GamesList'
-import Portada from '../components/Portada'
+import useGames from '../hooks/use-games'
+import { GameList } from '../components/list-of-games'
+import Portada from '../components/hero'
 
 const Home = () => {
   const { games, getMoreGames, page, portada } = useGames({})

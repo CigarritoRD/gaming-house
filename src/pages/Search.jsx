@@ -1,8 +1,8 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import useGames from '../hooks/useGames'
+import useGames from '../hooks/use-games'
 import { Bars } from 'react-loader-spinner'
-import { GameList } from '../components/GamesList'
+import { GameList } from '../components/list-of-games'
 
 const Search = () => {
   const { query } = useParams()

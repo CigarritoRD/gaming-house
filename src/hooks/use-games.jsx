@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 
-import { getGames } from '../services/getGames'
-import { getPlatforms } from '../services/getPlatforms'
+import { getGames } from '../services/get-games'
+import { getPlatforms } from '../services/get-platforms'
 import { API } from '../constants/url'
 
 const useGames = ({ search = '', platformOrGenres = '' }) => {

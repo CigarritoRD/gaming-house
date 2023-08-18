@@ -2,8 +2,8 @@
 import { Bars } from 'react-loader-spinner'
 import { useParams } from 'react-router-dom'
 
-import { GameList } from '../components/GamesList'
-import { useDiscoverGames } from '../hooks/useDiscoverGames'
+import { GameList } from '../components/list-of-games'
+import { useDiscoverGames } from '../hooks/use-discover-games'
 
 const DiscoverType = () => {
   const { type } = useParams()

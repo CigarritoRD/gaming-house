@@ -1,7 +1,7 @@
 
 import { useParams } from 'react-router-dom'
-import { GameList } from '../components/GamesList'
-import useGames from '../hooks/useGames'
+import { GameList } from '../components/list-of-games'
+import useGames from '../hooks/use-games'
 import { Bars } from 'react-loader-spinner'
 
 const Games = () => {

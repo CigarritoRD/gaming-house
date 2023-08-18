@@ -1,12 +1,11 @@
-
-import GameListItem from './GameListItem'
+import GameCard from './game-card'
 
 export function GameList ({ games, getMoreGames }) {
   return (<>
     <ul className='' style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(310px, 1fr))', gap: '14px' }}>
 
       {games.map(game => (
-        <GameListItem key={game.id} game={game} />
+        <GameCard key={game.id} game={game} />
 
       ))}
     </ul>

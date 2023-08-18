@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
-import './scrollbarcss.css'
+import { getPlatforms } from '../services/get-platforms'
 import { Link } from 'react-router-dom'
-import { getPlatforms } from '../services/getPlatforms'
-import { getGenres } from '../services/getGenres'
+import { getGenres } from '../services/get-genres'
 
 const AsideMenu = () => {
   const [genres, setGenres] = useState([])

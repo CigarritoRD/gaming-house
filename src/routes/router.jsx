@@ -1,11 +1,11 @@
 
 import { lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
-const DiscoverType = lazy(() => import('../pages/DiscoverType'))
-const Games = lazy(() => import('../pages/Games'))
-const Home = lazy(() => import('../pages/Home'))
-const GameDetail = lazy(() => import('../pages/GameDetail'))
-const Search = lazy(() => import('../pages/Search'))
+const DiscoverType = lazy(() => import('../pages/discover-typeof-games'))
+const Games = lazy(() => import('../pages/games'))
+const Home = lazy(() => import('../pages/home'))
+const GameDetail = lazy(() => import('../pages/game-details'))
+const Search = lazy(() => import('../pages/search'))
 
 const Routers = () => {
   return (

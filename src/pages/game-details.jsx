@@ -1,43 +1,12 @@
 
 import { plataformas } from '../constants/plataformas'
-import useSingleGame from '../hooks/useSingleGame'
+import useSingleGame from '../hooks/use-single-games'
 import { useParams } from 'react-router-dom'
 import './slider.css'
+import { SliderAndTrailer } from '../components/slider-and-thriller'
+import { PlatformsAvaliable } from '../components/platforms-avaliables'
+import { BackgroundDetail } from '../components/detail-games-background'
 
-const BackgroundDetail = ({ singleGame }) => {
-  return <div className='absolute w-full inset-0 -z-10'>
-    <div className='absolute w-full h-full inset-0 bg-gradient-to-b from-slate-900/60 to-slate-900/90'></div>
-    <img className='w-full h-full object-cover' src={singleGame?.background_image_additional} alt="" />
-  </div>
-}
-
-const SliderAndTrailer = ({ trailers, screenShots }) => {
-  return (<div className=' flex flex-col gap-4'>
-    {/* trailer of game */}
-    <div className='max-h-[460px] max-w-[800px]'>
-      {!!trailers?.length && <video src={trailers[0]?.data['480']} className='min-h-[400px]' controls>
-        <source src={trailers[0]?.data['480']} type="video/mp4" /></video>}
-    </div>
-
-    {/*  slider of screenshots */}
-    <div className='flex max-w-[800px] rounded-xl border border-slate-600 shadow-lg shadow-black snap-x snap-mandatory overflow-x-scroll '>
-      {screenShots?.map(screenshot => (
-        <div className=' h-[400px] w-full snap-center shrink-0' key={screenshot.image}>
-          <img className='h-[400px] w-full object-cover' src={screenshot.image} alt="" />
-        </div>
-
-      ))}
-    </div>
-  </div>)
-}
-const PlatformsAvaliable = ({ singleGame }) => {
-  return (<div className='flex flex-wrap gap-2 py-2'>{singleGame?.parent_platforms?.map(plataforma => {
-    return <div className='max-w-[18px] md:max-w-[22px]' key={plataforma.platform.id}><img className='w-full'
-      src={plataformas[plataforma.platform.name]}
-      alt={plataforma.platform.name} /></div>
-  })}
-  </div>)
-}
 const GameDetail = () => {
   const { slug } = useParams()
   const { screenShots, trailers, singleGame } = useSingleGame({ slug })
@@ -50,10 +19,10 @@ const GameDetail = () => {
           <div className='z-20 relative '>
             <h1 className='text-4xl lg:text-6xl pb-4 text-slate-200 font-bold '>{singleGame.name}</h1>
             <div className='flex items-center justify-between'>
-              <p className='text-slate-100 flex flex-col md:block'>lanzamiento: <span className='px-2 rounded-xl bg-slate-300 text-slate-600'>{singleGame?.released}</span></p>
+              <p className='text-slate-100 flex flex-col lg:flex-row gap-4'>lanzamiento: <span className='px-2 rounded-xl bg-slate-300 text-slate-600'>{singleGame?.released}</span></p>
 
-              <div className='flex items-center md:gap-2 flex-col'> <p className='text-slate-100'>plataformas:</p>
-                <PlatformsAvaliable singleGame={singleGame} />
+              <div className='flex items-center md:gap-2 flex-col lg:flex-row'> <p className='text-slate-100'>plataformas:</p>
+                <PlatformsAvaliable plataformas={plataformas} singleGame={singleGame} />
               </div>
             </div>
             <div className='overflow-hidden max-h-[400px] rounded-xl'>
