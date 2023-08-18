@@ -4,18 +4,20 @@ import useGames from '../hooks/useGames'
 
 const MainContent = ({ getSingleGame }) => {
   const { games } = useGames()
-  const [portada, setPortada] = useState({})
+  const [portada, setPortada] = useState({ imagen: '', titulo: '' })
 
   useEffect(() => {
+    console.log('hola')
     const portadaChanger = setTimeout(() => {
       const portadaAleatoria = Math.floor(Math.random() * games.length)
-      const portada = games.map(game => {
+      const newportada = games.map(game => {
         return { imagen: game.background_image, titulo: game.name }
       })
-      setPortada(portada[portadaAleatoria])
+      setPortada(newportada[portadaAleatoria])
     }, 5000)
+
     return () => clearTimeout(portadaChanger)
-  }, [portada])
+  }, [])
 
   return (
     <div className='h-full rounded-3xl w-full overflow-y-scroll flex flex-col gap-4 p-4 scrollbar'>

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { API_KEY, API_URL } from '../constants/url'
-import { getGames } from '../helpers/getGames'
+import { getGames } from '../services/getGames'
 
 const typesOfUrls = {
   mejores: `${API_URL}games?${API_KEY}&metacritic=75,100&ordering=-metacritic&page=1`,

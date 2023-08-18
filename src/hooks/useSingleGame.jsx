@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { getTrailers } from '../helpers/getTrailers'
-import { getScreenShots } from '../helpers/getScreenShots'
-import { singleGame as getGame } from '../helpers/singleGame.js'
+import { getTrailers } from '../services/getTrailers'
+import { getScreenShots } from '../services/getScreenShots'
+import { singleGame as getGame } from '../services/singleGame.js'
 const useSingleGame = ({ slug }) => {
   const [singleGame, setSingleGame] = useState({})
   const [trailers, setTrailers] = useState()
