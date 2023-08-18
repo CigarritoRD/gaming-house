@@ -1,5 +1,5 @@
 
-import Layout from './components/layout.jsx'
+import Layout from './components/layout'
 
 function App () {
   return (
