@@ -18,10 +18,10 @@ const GameDetail = () => {
         <div className='grid gap-4 md:gap-8 pt-10 md:px-4'>
           <div className='z-20 relative '>
             <h1 className='text-4xl lg:text-6xl pb-4 text-slate-200 font-bold '>{singleGame.name}</h1>
-            <div className='flex items-center justify-between'>
-              <p className='text-slate-100 flex flex-col lg:flex-row gap-4'>lanzamiento: <span className='px-2 rounded-xl bg-slate-300 text-slate-600'>{singleGame?.released}</span></p>
+            <div className='flex items-center justify-between pb-1'>
+              <p className='text-slate-100 flex flex-col lg:flex-row gap-1 lg:gap-4'>lanzamiento: <span className='px-2 rounded-xl bg-slate-300 text-slate-600'>{singleGame?.released}</span></p>
 
-              <div className='flex items-center md:gap-2 flex-col lg:flex-row'> <p className='text-slate-100'>plataformas:</p>
+              <div className='flex items-center lg:gap-4 flex-col lg:flex-row'> <p className='text-slate-100'>plataformas:</p>
                 <PlatformsAvaliable plataformas={plataformas} singleGame={singleGame} />
               </div>
             </div>

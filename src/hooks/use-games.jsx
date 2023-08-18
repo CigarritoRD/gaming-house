@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
 import { getGames } from '../services/get-games'
 import { getPlatforms } from '../services/get-platforms'
@@ -8,13 +8,14 @@ const useGames = ({ search = '', platformOrGenres = '' }) => {
   const [games, setGames] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
-  const [page, setPage] = useState('')
+  const nextPage = useRef('')
   const [portada, setPortada] = useState({ titulo: '', imagen: '' })
 
   const getMoreGames = ({ url }) => {
     getGames({ url })
       .then(data => {
-        setPage(data.next)
+        console.log(data)
+        nextPage.current = data.next
         if (!portada.titulo) { setPortada({ titulo: data.results[0]?.name, imagen: data.results[0]?.background_image }) }
         setGames(prev => {
           const prevGames = structuredClone(prev)
@@ -51,9 +52,7 @@ const useGames = ({ search = '', platformOrGenres = '' }) => {
       return
     }
     if (search) {
-      console.log(search)
       const url = `${API.SECTION.GAMES}?${API.API_KEY}&search=${search}`
-      console.log(url)
       getMoreGames({ url })
       return
     }
@@ -71,14 +70,13 @@ const useGames = ({ search = '', platformOrGenres = '' }) => {
   useEffect(() => {
     // cambia las portadas de manera aleatoria
     const portadaChanger = setTimeout(() => {
-      console.log('refresh')
       const portadaAleatoria = Math.floor(Math.random() * games.length)
       setPortada(portadas[portadaAleatoria])
     }, 5000)
     return () => clearTimeout(portadaChanger)
   }, [portada])
 
-  return { games, getMoreGames, loading, error, page, portada }
+  return { games, getMoreGames, loading, error, portada, nextPage }
 }
 
 export default useGames

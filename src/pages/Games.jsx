@@ -6,11 +6,11 @@ import { Bars } from 'react-loader-spinner'
 
 const Games = () => {
   const { name } = useParams()
-  const { games, error, getMoreGames, page } = useGames({ platformOrGenres: name })
+  const { games, error, getMoreGames, nextPage } = useGames({ platformOrGenres: name })
   const isLoading = !!(games.length === 0 && !error)
 
   const handleclick = () => {
-    getMoreGames({ url: page })
+    getMoreGames({ url: nextPage.current })
   }
   return (
 
@@ -27,7 +27,12 @@ const Games = () => {
             visible={true}
           />
         </div>}
-      {games.length > 0 && <GameList games={games} getMoreGames={handleclick} />}
+      {games.length > 0 &&
+        <GameList
+          games={games}
+          url={nextPage.current}
+          getMoreGames={handleclick}
+        />}
 
     </div >
 
